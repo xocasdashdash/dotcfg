@@ -108,7 +108,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker fzf-zsh dotenv)
+plugins=(git docker fzf-zsh dotenv kube-ps1)
 
 
 # User configuration
@@ -146,16 +146,20 @@ add-zsh-hook -Uz chpwd (){
 
 tenant_info(){
     if [ -n "$OS_USERNAME" ]; then
-    echo '%{$fg[red]%}'${OS_PROJECT}'%{$reset_color%}'
+        echo "%{$fg[red]%}( tenant: ${OS_PROJECT})%{$reset_color%}"
     fi
 }
 
-PROMPT='%{$fg[green]%}%~%{$fg_bold[blue]%}bbbaa$(git_prompt_info)$(tenant_info)%{$reset_color%} '
-ZSH_THEME_GIT_PROMPT_PREFIX="["
-ZSH_THEME_GIT_PROMPT_SUFFIX="]"
-ZSH_THEME_GIT_PROMPT_DIRTY=" ✗"
-ZSH_THEME_GIT_PROMPT_CLEAN=" ✔"
-
 source $ZSH/oh-my-zsh.sh
+NEWLINE=$'\n'
+TAB=$'  '
+
+PROMPT=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)$(tenant_info)$(kube_ps1)'
+PROMPT+="${NEWLINE}${TAB}%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 . $HOME/.asdf/asdf.sh
