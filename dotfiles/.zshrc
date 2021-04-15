@@ -1,6 +1,6 @@
 # Set up the prompt
-
-autoload -Uz promptinit
+zmodload zsh/zprof
+#autoload -Uz promptinit
 #promptinit
 #prompt adam1
 
@@ -20,7 +20,7 @@ compinit
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
+# zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
 eval "$(dircolors -b)"
@@ -31,7 +31,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:
 zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
+zstyle ':completion:*' verbose false
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
@@ -41,7 +41,7 @@ export PATH="${PATH}:${HOME}/bin"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/joaquin/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -108,7 +108,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker fzf-zsh dotenv kube-ps1)
+plugins=(git docker fzf-zsh dotenv kube-ps1 kubectl)
 
 
 # User configuration
@@ -125,13 +125,21 @@ else
   export EDITOR='mvim'
 fi
 
-autoload -U add-zsh-hook
-add-zsh-hook -Uz chpwd (){ 
+_load_openstack_rc() {
     if [ -f "openstack_rc" ]; then
-        cat openstack_rc |grep -v PS1 > /tmp/openstack_rc
-        source /tmp/openstack_rc
+        echo 'Loading openstack_rc'
+        cat openstack_rc |grep -v PS1|grep -v OS_CACERT > /tmp/openstack_rc
+        . /tmp/openstack_rc
+        #echo 'Loaded'
+        [ -f /tmp/openstack_rc ] && rm /tmp/openstack_rc
     fi
 }
+# load add-zsh-hook if it's not available yet
+(( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
+
+# hook _ls_on_cwd_change onto `chpwd`
+add-zsh-hook chpwd _load_openstack_rc
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -146,7 +154,7 @@ add-zsh-hook -Uz chpwd (){
 
 tenant_info(){
     if [ -n "$OS_USERNAME" ]; then
-        echo "%{$fg[red]%}( tenant: ${OS_PROJECT})%{$reset_color%}"
+        echo "%{$fg[red]%}( tenant: ${OS_PROJECT_NAME})%{$reset_color%}"
     fi
 }
 
@@ -155,7 +163,7 @@ NEWLINE=$'\n'
 TAB=$'  '
 
 PROMPT=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)$(tenant_info)$(kube_ps1)'
-PROMPT+="${NEWLINE}${TAB}%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+PROMPT+="${NEWLINE}${TAB}%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
@@ -163,3 +171,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 . $HOME/.asdf/asdf.sh
+
+export OS_CACERT="~/CERTS/CA_BBVA.cer"
+
+[ -f ${HOME}/.env ] && . ${HOME}/.env
