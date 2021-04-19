@@ -10,7 +10,7 @@
 	email = joaquin.fernandez.campo.next@bbva.com
 	name = Joaquín Fernández Campo
 [format]
-    signoff = true
+    signoOff = true
 #}}}
 # include sendemail config {{{
 [include]
