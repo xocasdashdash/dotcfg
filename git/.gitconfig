@@ -7,9 +7,10 @@
 #}}}
 # user {{{
 [user]
-    email = Joaquín Fernández Campo
-    name = me@me.com
-
+	email = joaquin.fernandez.campo.next@bbva.com
+	name = Joaquín Fernández Campo
+[format]
+    signoff = true
 #}}}
 # include sendemail config {{{
 [include]

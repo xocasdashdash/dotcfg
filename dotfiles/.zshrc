@@ -174,4 +174,5 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 export OS_CACERT="~/CERTS/CA_BBVA.cer"
 
-[ -f ${HOME}/.env ] && . ${HOME}/.env
+[ -f ${HOME}/.env ] && . ${HOME}/.envalias k=kubectl
+complete -F __start_kubectl k

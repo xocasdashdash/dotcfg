@@ -17,6 +17,7 @@ ln -sf "$(pwd)/dotfiles/001-alias.zsh" ~/.oh-my-zsh/custom/
 grep -q asdf ~/.zshrc || echo ". \$HOME/.asdf/asdf.sh" >> ~/.zshrc
 dconf load /org/gnome/terminal/legacy/profiles:/ < terminator/config
 sudo snap install --classic code
+sudo snap install spotify
 
 while read -r line; do
 code --install-extension "${line}"
@@ -26,3 +27,4 @@ sh asdf/install.sh
 sh python/install.sh
 sh kubernetes/install.sh
 sh git/install.sh
+sh networking/install.sh
