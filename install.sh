@@ -5,7 +5,7 @@ htop docker zlib1g-dev build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev libffi-dev liblzma-dev python-openssl git xclip bash-completion lastpass-cli \
 build-essential cmake libcurl4 libcurl4-openssl-dev libxml2 libxml2-dev libssl1.1 \
-pkg-config ca-certificates
+pkg-config ca-certificates sshpass
   
 
 grep -e "${USER}.*zsh" /etc/passwd -q || chsh -s "$(which zsh)"

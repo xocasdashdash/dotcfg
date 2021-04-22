@@ -5,3 +5,4 @@ kubectl 1.21.0
 oc 4.7.7
 terraform 0.14.10
 promtool v2.26.0
+istioctl 1.9.3

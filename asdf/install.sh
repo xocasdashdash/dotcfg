@@ -22,5 +22,6 @@ asdf install kubectl 1.21.1
 asdf install oc 4.7.7
 asdf install terraform 0.14.10
 asdf install promtool v2.26.0
+asdf install istioctl 1.9.3
 
 ln -sf "$( dirname "${canonical}")/.tool-versions" ~/.tool-versions
