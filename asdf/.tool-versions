@@ -9,3 +9,5 @@ helm 3.5.4
 istioctl 1.9.3
 pnpm 6.1.0-202104230041
 nodejs 16.0.0
+gradle 4.10.3
+
