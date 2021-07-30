@@ -14,6 +14,8 @@ asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
 asdf plugin-add terraform 
 asdf plugin-add promtool https://github.com/looztra/asdf-promtool
 asdf plugin-add nodejs
+asdf plugin-add goreleaser https://github.com/kforsthoevel/asdf-goreleaser.git
+
 
 asdf install golang 1.13.15 1.16.3
 asdf install python 3.9.4
@@ -25,5 +27,6 @@ asdf install promtool v2.26.0
 asdf install istioctl 1.9.3
 asdf install nodejs 16.0.0
 asdf install gradle 4.10.3
+asdf install goreleaser 0.172.1
 
 ln -sf "$( dirname "${canonical}")/.tool-versions" ~/.tool-versions

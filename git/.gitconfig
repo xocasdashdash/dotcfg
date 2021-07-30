@@ -7,7 +7,7 @@
 #}}}
 # user {{{
 [user]
-	email = joaquin.fernandez.campo.next@bbva.com
+	email = jfcampo@gmail.com
 	name = Joaquín Fernández Campo
 [format]
     signoOff = true
@@ -89,7 +89,6 @@
     fl = log -u
     filelog = log -u
     # }}}
-    # diff {{{
     d = diff --word-diff
     dc = diff --cached
     # diff last commit
@@ -168,6 +167,8 @@
     # undo from here http://megakemp.com/2016/08/25/git-undo/
     undo = "!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; }; f"
     # }}}
+    podar = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+
 # }}}
 [rerere]
   enabled = false
@@ -177,3 +178,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/

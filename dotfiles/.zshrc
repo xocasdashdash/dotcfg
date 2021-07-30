@@ -1,5 +1,7 @@
 # Set up the prompt
 zmodload zsh/zprof
+source ~/antigen.zsh
+
 #autoload -Uz promptinit
 #promptinit
 #prompt adam1
@@ -109,7 +111,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker fzf-zsh dotenv kube-ps1 kubectl)
+#plugins=(git docker fzf-zsh dotenv)
 
 
 # User configuration
@@ -126,20 +128,10 @@ else
   export EDITOR='mvim'
 fi
 
-_load_openstack_rc() {
-    if [ -f "openstack_rc" ]; then
-        echo 'Loading openstack_rc'
-        cat openstack_rc |grep -v PS1|grep -v OS_CACERT > /tmp/openstack_rc
-        . /tmp/openstack_rc
-        #echo 'Loaded'
-        [ -f /tmp/openstack_rc ] && rm /tmp/openstack_rc
-    fi
-}
 # load add-zsh-hook if it's not available yet
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
 
 # hook _ls_on_cwd_change onto `chpwd`
-add-zsh-hook chpwd _load_openstack_rc
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -153,30 +145,47 @@ add-zsh-hook chpwd _load_openstack_rc
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-tenant_info(){
-    if [ -n "$OS_USERNAME" ]; then
-        echo "%{$fg[red]%}( tenant: ${OS_PROJECT_NAME})%{$reset_color%}"
-    fi
-}
-
 ZSH_DISABLE_COMPFIX=true
+# Load the oh-my-zsh's library.
+#export ANTIGEN_LOG=/tmp/antigen.log
+#export ANTIGEN_DEBUG_LOG=/tmp/antigen.debug.log
+antigen use oh-my-zsh
 
-source $ZSH/oh-my-zsh.sh
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle docker
+antigen bundle dotenv
+antigen bundle zsh-users/zsh-completions
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+antigen bundle unixorn/fzf-zsh-plugin@main
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+# You probably will want to install powerline fonts https://github.com/powerline/fonts
+antigen theme ohmyzsh/ohmyzsh
+
+antigen use ohmyzsh/ohmyzsh
+antigen apply
+
+
+#source $ZSH/oh-my-zsh.sh
 NEWLINE=$'\n'
 TAB=$'  '
 
-PROMPT=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)$(kube_ps1)'
-PROMPT+="${NEWLINE}${TAB}%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
-RPROMPT='$(tenant_info)'
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+PROMPT=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
+#PROMPT+="${NEWLINE}${TAB}%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
+#ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+#ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+#ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
+#ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 . $HOME/.asdf/asdf.sh
 
-export OS_CACERT="~/CERTS/CA_BBVA.cer"
-
 [ -f ${HOME}/.env ] && . ${HOME}/.env
-alias k=kubectl
-complete -F __start_kubectl k
+#alias k=kubectl
+#complete -F __start_kubectl k
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
