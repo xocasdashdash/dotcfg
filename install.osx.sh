@@ -2,7 +2,7 @@
 
 brew --version || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install jq jo ack-grep fzf htop docker
+brew install jq jo ack-grep fzf htop docker tree
 brew install --cask firefox
 brew_prefix=$(brew --prefix)
 "${brew_prefix}/opt/fzf/install" --all
@@ -22,4 +22,3 @@ sh asdf/install.sh
 sh python/install.sh
 sh iterm/install.sh
 sh git/install.sh
-sh iterm/install.sh
