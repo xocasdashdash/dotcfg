@@ -1,2 +1,4 @@
 .env
+*_private_key*
+
 launch.json

@@ -28,5 +28,6 @@ asdf install istioctl 1.9.3
 asdf install nodejs 16.0.0
 asdf install gradle 4.10.3
 asdf install goreleaser 0.172.1
+asdf install node latest
 
 ln -sf "$( dirname "${canonical}")/.tool-versions" ~/.tool-versions

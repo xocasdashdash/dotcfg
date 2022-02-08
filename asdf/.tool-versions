@@ -1,5 +1,5 @@
 java adoptopenjdk-8.0.282+8
-golang 1.16.6
+golang 1.17.6
 python 3.9.4
 kubectl 1.21.0
 oc 4.7.7
@@ -8,7 +8,10 @@ promtool v2.26.0
 helm 3.5.4
 istioctl 1.9.3
 pnpm 6.1.0-202104230041
-nodejs 16.0.0
+nodejs 14.17.0
 gradle 4.10.3
 goreleaser 0.172.1
-golangci-lint 1.41.1
+golangci-lint 1.42.1
+aws-sam-cli 1.33.0
+aws-vault 6.3.1
+packer 1.7.8

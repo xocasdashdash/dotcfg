@@ -17,7 +17,11 @@ SAVEHIST=1000000
 HISTFILE=~/.zsh_history
 
 # Use modern completion system
-autoload -U +X compinit && compinit
+autoload -U +X compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 autoload -U +X bashcompinit && bashcompinit
 
 
@@ -189,3 +193,6 @@ PROMPT=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
 #complete -F __start_kubectl k
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#zprof
+export PATH="/usr/local/opt/curl/bin:$PATH"

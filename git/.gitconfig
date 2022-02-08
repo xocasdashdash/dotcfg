@@ -167,8 +167,8 @@
     # undo from here http://megakemp.com/2016/08/25/git-undo/
     undo = "!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; }; f"
     # }}}
-    podar = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
-    set-upstream = \
+    podar = "!f() { git branch | grep -E -v 'master|develop|\\*' | xargs -I ss git branch -d ss; }; f"
+    track = \
        !git branch \
            --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 # }}}
@@ -182,3 +182,6 @@
 	required = true
 [include]
 	path = ~/.git_secret_config
+[init]
+	defaultBranch = main
+
