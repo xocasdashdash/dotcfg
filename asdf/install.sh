@@ -27,29 +27,33 @@ asdf plugin add starship
 asdf install ag ag
 
 
-asdf install git latest
-asdf install golang 1.13.15 1.16.3
-asdf install python 3.9.4
-asdf install java adoptopenjdk-8.0.282+8
-asdf install kubectl 1.21.1
-asdf install oc 4.7.7
-asdf install terraform 0.14.10
-asdf install promtool v2.26.0
-asdf install istioctl 1.9.3
-asdf install nodejs 16.0.0
-asdf install gradle 4.10.3
-asdf install goreleaser 0.172.1
-asdf install node latest
-asdf install github-cli latest
-asdf install just latest
-asdf install gojq latest
-asdf install fzf latest
-asdf install 1password-cli latest
-asdf install awscli latest
-asdf install starship latest
-asdf install ag latest
+install_asdf() {
+  artifact="$1"
+  version="${2:-latest}"
+  echo "Installing $version of $artifact"
+  asdf install $artifact $version
+  asdf global "$artifact" "$version"
+}
+# Note this may fail because of github rate limiting.
+install_asdf git
+install_asdf golang
+install_asdf python
+install_asdf java adoptopenjdk-8.0.282+8
+install_asdf kubectl
+install_asdf terraform
+install_asdf promtool
+install_asdf nodejs
+install_asdf goreleaser
+install_asdf node 
+install_asdf github-cli
+install_asdf just
+install_asdf 1password-cli
+install_asdf awscli
+install_asdf ag
 
-ln -sf "$( dirname "${canonical}")/.tool-versions" ~/.tool-versions
+install_asdf gojq
+install_asdf fzf
+install_asdf starship
 
 
 ## Install completions for some tools
