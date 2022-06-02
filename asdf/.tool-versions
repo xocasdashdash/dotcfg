@@ -9,9 +9,10 @@ helm 3.5.4
 istioctl 1.9.3
 pnpm 6.1.0-202104230041
 nodejs 14.17.0
-gradle 4.10.3
+gradle 7.4
 goreleaser 0.172.1
 golangci-lint 1.42.1
 aws-sam-cli 1.33.0
 aws-vault 6.3.1
 packer 1.7.8
+awscli 2.4.15
