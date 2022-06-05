@@ -18,6 +18,9 @@ while read -r line; do
 code --install-extension "${line}"
 done < code/extensions
 
+
+mkdir -p ~/.oh-my-zsh/completions
+
 sh asdf/install.sh
 sh python/install.sh
 sh iterm/install.sh
