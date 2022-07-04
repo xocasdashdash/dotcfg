@@ -18,7 +18,15 @@ asdf plugin-add goreleaser https://github.com/kforsthoevel/asdf-goreleaser.git
 asdf plugin-add github-cli https://github.com/bartlomiejdanek/asdf-github-cli.git
 asdf plugin-add just https://github.com/franklad/asdf-just
 asdf plugin update just 8f4b5c209ed59f6e3acc600a470b69d68f5d78e1
+asdf plugin-add gojq
+asdf plugin-add fzf
+asdf plugin-add git
+asdf plugin add 1password-cli
+asdf plugin add awscli
 
+
+
+asdf install git latest
 asdf install golang 1.13.15 1.16.3
 asdf install python 3.9.4
 asdf install java adoptopenjdk-8.0.282+8
@@ -33,9 +41,25 @@ asdf install goreleaser 0.172.1
 asdf install node latest
 asdf install github-cli latest
 asdf install just latest
+asdf install gojq latest
+asdf install fzf latest
+asdf install 1password-cli latest
+asdf install awscli latest
 
 ln -sf "$( dirname "${canonical}")/.tool-versions" ~/.tool-versions
 
 
 ## Install completions for some tools
 gh completion -s zsh > "${HOME}/.oh-my-zsh/completions/_gh"
+
+## This is a hack to improve speed 
+## https://github.com/asdf-vm/asdf/issues/290
+set -e
+if [ ! -d  /tmp/asdf-exec ]; then git clone git@github.com:danhper/asdf-exec.git /tmp/asdf-exec; fi;
+cd /tmp/asdf-exec && make all && cp build/asdf-exec-darwin-x64 ~/.asdf/bin/private/asdf-exec && cd -;
+chmod +x  ~/.asdf/bin/private/asdf-exec
+## This line is very sensible to changes, verify it in case of any issue.
+sed -i.bak -e 's|exec $(asdf_dir)/bin/asdf exec|exec $(asdf_dir)/bin/private/asdf-exec|' ~/.asdf/lib/commands/reshim.bash
+find  ~/.asdf/shims  -type f -exec rm {} \;
+asdf reshim
+rm -rf /tmp/asdf-exec

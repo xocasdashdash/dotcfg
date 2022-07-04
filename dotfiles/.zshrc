@@ -115,7 +115,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(git docker fzf-zsh dotenv)
+#plugins=(docker fzf-zsh dotenv)
 
 
 # User configuration
@@ -166,7 +166,7 @@ antigen bundle command-not-found
 antigen bundle unixorn/fzf-zsh-plugin@main
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
-
+antigen bundle dbz/kube-aliases
 # Load the theme.
 # You probably will want to install powerline fonts https://github.com/powerline/fonts
 antigen theme ohmyzsh/ohmyzsh
@@ -196,3 +196,4 @@ PROMPT=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
 
 #zprof
 export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/libressl/bin:$PATH"

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-sudo apt install -y zsh git git-crypt gnupg coreutils jq jo ack-grep fzf \
+sudo apt install -y zsh git-crypt gnupg coreutils jo ack-grep fzf \
 htop docker zlib1g-dev build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev libffi-dev liblzma-dev python-openssl git xclip bash-completion lastpass-cli \
@@ -28,6 +28,7 @@ done < code/extensions
 mkdir -p ~/.oh-my-zsh/completions
 
 sh asdf/install.sh
+"$(asdf where fzf)/install" --all
 sh python/install.sh
 sh kubernetes/install.sh
 sh git/install.sh

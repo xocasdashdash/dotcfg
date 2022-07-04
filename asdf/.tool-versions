@@ -1,9 +1,9 @@
 java adoptopenjdk-8.0.282+8
-golang 1.17.6
+golang 1.18
 python 3.9.4
-kubectl 1.21.0
+kubectl 1.24.2
 oc 4.7.7
-terraform 0.14.10
+terraform 0.15.5
 promtool v2.26.0
 helm 3.5.4
 istioctl 1.9.3
@@ -18,3 +18,11 @@ packer 1.7.8
 awscli 2.4.15
 github-cli 2.11.3
 just 1.2.0
+mysql 8.0.29
+dagger 0.2.19
+cue 0.4.3
+viddy 0.3.4
+kubebuilder 3.5.0
+gojq 0.12.8
+fzf 0.30.0
+git 2.37.0

@@ -13,3 +13,4 @@ function . {
         builtin . "$@"
     fi
 }
+alias jq=gojq
