@@ -189,7 +189,6 @@ PROMPT=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
 . $HOME/.asdf/asdf.sh
 
 [ -f ${HOME}/.env ] && . ${HOME}/.env
-#alias k=kubectl
 #complete -F __start_kubectl k
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -197,3 +196,4 @@ PROMPT=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
 #zprof
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/libressl/bin:$PATH"
+export KUBE_EDITOR='code --wait'

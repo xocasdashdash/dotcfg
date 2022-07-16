@@ -14,3 +14,4 @@ function . {
     fi
 }
 alias jq=gojq
+alias k=kubectl
