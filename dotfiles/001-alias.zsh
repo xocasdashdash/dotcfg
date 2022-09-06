@@ -15,3 +15,8 @@ function . {
 }
 alias jq=gojq
 alias k=kubectl
+alias yq="gojq --yaml-input"
+alias ack=ag
+alias psql="docker run --rm --entrypoint psql -it postgres:14.3-alpine3.16"
+alias psql143="docker run --rm --entrypoint psql -it postgres:14.3-alpine3.16"
+alias mysql=mysql

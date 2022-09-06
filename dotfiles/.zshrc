@@ -1,49 +1,23 @@
 # Set up the prompt
+DISABLE_AUTO_UPDATE="true"
 zmodload zsh/zprof
-source ~/antigen.zsh
+[[ -e ${ZDOTDIR:-~}/.zgenom ]] || git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
 
-#autoload -Uz promptinit
-#promptinit
-#prompt adam1
-
+. $HOME/.asdf/asdf.sh
+source "${HOME}/.zgenom/zgenom.zsh"
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
-# Keep 100000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000000
-SAVEHIST=1000000
+# Keep 10000000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=10000000
+SAVEHIST=10000000
 HISTFILE=~/.zsh_history
 
-# Use modern completion system
-autoload -U +X compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-autoload -U +X bashcompinit && bashcompinit
-
-
-#zstyle ':completion:*' auto-description 'specify: %d'
-#zstyle ':completion:*' completer _expand _complete _correct _approximate
-## zstyle ':completion:*' format 'Completing %d'
-#zstyle ':completion:*' group-name ''
-#zstyle ':completion:*' menu select=2
-#eval "$(dircolors -b)"
-#zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-#zstyle ':completion:*' list-colors ''
-#zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-#zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-#zstyle ':completion:*' menu select=long
-#zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-#zstyle ':completion:*' use-compctl false
-#zstyle ':completion:*' verbose false
-#
-#zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-#zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-export PATH="${PATH}:${HOME}/bin"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -54,69 +28,6 @@ export ZSH="${HOME}/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-#plugins=(docker fzf-zsh dotenv)
-
 
 # User configuration
 
@@ -135,65 +46,77 @@ fi
 # load add-zsh-hook if it's not available yet
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
 
-# hook _ls_on_cwd_change onto `chpwd`
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 ZSH_DISABLE_COMPFIX=true
-# Load the oh-my-zsh's library.
-#export ANTIGEN_LOG=/tmp/antigen.log
-#export ANTIGEN_DEBUG_LOG=/tmp/antigen.debug.log
-antigen use oh-my-zsh
+setup-zgen-repos() {
+  zgenom ohmyzsh
+  zgenom ohmyzsh plugins/git
+  zgenom ohmyzsh plugins/docker
+  zgenom ohmyzsh plugins/dotenv
+  zgenom ohmyzsh plugins/pip
+  zgenom ohmyzsh plugins/lein
+  zgenom ohmyzsh plugins/command-not-found
+  zgenom load zsh-users/zsh-completions src
+  zgenom load unixorn/autoupdate-zgenom
+  zgenom load unixorn/fzf-zsh-plugin
+  zgenom load unixorn/1password-op.plugin.zsh
+  zgenom load srijanshetty/docker-zsh
+  zgenom load zdharma-continuum/fast-syntax-highlighting
+  zgenom load zsh-users/zsh-history-substring-search
+  zgenom load dbz/kube-aliases src
+  zgenom load agkozak/zsh-z
+  if [ $(uname -a | grep -ci Darwin) = 1 ]; then
+    # Load macOS-specific plugins
+    zgenom oh-my-zsh plugins/brew
+    zgenom oh-my-zsh plugins/macos
+  fi
+  zgenom save
+}
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle docker
-antigen bundle dotenv
-antigen bundle zsh-users/zsh-completions
-antigen bundle pip
-antigen bundle lein
-antigen bundle command-not-found
-antigen bundle unixorn/fzf-zsh-plugin@main
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle dbz/kube-aliases
-# Load the theme.
-# You probably will want to install powerline fonts https://github.com/powerline/fonts
-antigen theme ohmyzsh/ohmyzsh
+if ! zgen saved; then
+  setup-zgen-repos
+fi
 
-antigen use ohmyzsh/ohmyzsh
-antigen apply
+# We need to load shell fragment files often enough to make it a function
+function load-shell-fragments() {
+  if [[ -z $1 ]]; then
+    echo "You must give load-shell-fragments a directory path"
+  else
+    if [[ -d "$1" ]]; then
+      if [ -n "$(/bin/ls -A $1)" ]; then
+        for _zqs_fragment in $(/bin/ls -A $1)
+        do
+          if [ -r $1/$_zqs_fragment ]; then
+            source $1/$_zqs_fragment
+          fi
+        done
+        unset _zqs_fragment
+      fi
+    else
+      echo "$1 is not a directory"
+    fi
+  fi
+}
+
+
+# Make it easy to append your own customizations that override the
+# quickstart's defaults by loading all files from the ~/.zshrc.d directory
+load-shell-fragments ~/.zshrc.d
 
 
 #source $ZSH/oh-my-zsh.sh
 NEWLINE=$'\n'
 TAB=$'  '
 
-PROMPT=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
-#PROMPT+="${NEWLINE}${TAB}%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
-#ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
-#ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-#ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
-#ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
-
-. $HOME/.asdf/asdf.sh
+#PROMPT=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
 
 [ -f ${HOME}/.env ] && . ${HOME}/.env
-#complete -F __start_kubectl k
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #zprof
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/libressl/bin:$PATH"
+export PATH="~/.asdf/shims:$PATH"
+export PATH="${PATH}:~/bin"
 export KUBE_EDITOR='code --wait'
+eval "$(starship init zsh)"

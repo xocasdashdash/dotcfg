@@ -23,7 +23,8 @@ asdf plugin-add fzf
 asdf plugin-add git
 asdf plugin add 1password-cli
 asdf plugin add awscli
-
+asdf plugin add starship
+asdf install ag ag
 
 
 asdf install git latest
@@ -45,6 +46,8 @@ asdf install gojq latest
 asdf install fzf latest
 asdf install 1password-cli latest
 asdf install awscli latest
+asdf install starship latest
+asdf install ag latest
 
 ln -sf "$( dirname "${canonical}")/.tool-versions" ~/.tool-versions
 
@@ -55,8 +58,8 @@ gh completion -s zsh > "${HOME}/.oh-my-zsh/completions/_gh"
 ## This is a hack to improve speed 
 ## https://github.com/asdf-vm/asdf/issues/290
 set -e
-if [ ! -d  /tmp/asdf-exec ]; then git clone git@github.com:danhper/asdf-exec.git /tmp/asdf-exec; fi;
-cd /tmp/asdf-exec && make all && cp build/asdf-exec-darwin-x64 ~/.asdf/bin/private/asdf-exec && cd -;
+if [ ! -d  /tmp/asdf-exec ]; then git clone git@github.com:xocasdashdash/asdf-exec.git /tmp/asdf-exec; fi;
+cd /tmp/asdf-exec && make macos && cp build/asdf-exec-darwin-x64 ~/.asdf/bin/private/asdf-exec && cd -;
 chmod +x  ~/.asdf/bin/private/asdf-exec
 ## This line is very sensible to changes, verify it in case of any issue.
 sed -i.bak -e 's|exec $(asdf_dir)/bin/asdf exec|exec $(asdf_dir)/bin/private/asdf-exec|' ~/.asdf/lib/commands/reshim.bash

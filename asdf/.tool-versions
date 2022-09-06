@@ -1,9 +1,9 @@
 java adoptopenjdk-8.0.282+8
-golang 1.18
+golang 1.18.2
 python 3.9.4
 kubectl 1.24.2
 oc 4.7.7
-terraform 1.2.4
+terraform 1.2.5
 promtool v2.26.0
 helm 3.5.4
 istioctl 1.9.3
@@ -11,12 +11,12 @@ pnpm 6.1.0-202104230041
 nodejs 14.17.0
 gradle 7.4
 goreleaser 0.172.1
-golangci-lint 1.42.1
+golangci-lint 1.49.0
 aws-sam-cli 1.33.0
 aws-vault 6.3.1
 packer 1.7.8
-awscli 2.4.15
-github-cli 2.13.0
+awscli 2.7.20
+github-cli 2.14.7
 just 1.2.0
 mysql 8.0.29
 dagger 0.2.19
@@ -28,3 +28,7 @@ fzf 0.30.0
 git 2.37.0
 tflint 0.38.1
 kubectx 0.9.4
+tfupdate 0.6.5
+redis-cli 7.0.4
+starship 1.10.2
+ag 2.2.0
