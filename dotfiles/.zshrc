@@ -18,9 +18,6 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.zsh_history
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
@@ -45,6 +42,36 @@ fi
 
 # load add-zsh-hook if it's not available yet
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
+
+# Configure path
+export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/libressl/bin:$PATH"
+export PATH="$HOME/.asdf/shims:$PATH"
+export PATH="${PATH}:$HOME/bin"
+
+# We need to load shell fragment files often enough to make it a function
+function load-shell-fragments() {
+  if [[ -z $1 ]]; then
+    echo "You must give load-shell-fragments a directory path"
+  else
+    if [[ -d "$1" ]]; then
+      if [ -n "$(/bin/ls -A $1)" ]; then
+        for _zqs_fragment in $(/bin/ls -A $1)
+        do
+          if [ -r $1/$_zqs_fragment ]; then
+            source $1/$_zqs_fragment
+          fi
+        done
+        unset _zqs_fragment
+      fi
+    else
+      echo "$1 is not a directory"
+    fi
+  fi
+}
+# Make it easy to append your own customizations that override the
+# quickstart's defaults by loading all files from the ~/.zshrc.d directory
+load-shell-fragments ~/.zshrc.d
 
 ZSH_DISABLE_COMPFIX=true
 setup-zgen-repos() {
@@ -76,47 +103,10 @@ if ! zgen saved; then
   setup-zgen-repos
 fi
 
-# We need to load shell fragment files often enough to make it a function
-function load-shell-fragments() {
-  if [[ -z $1 ]]; then
-    echo "You must give load-shell-fragments a directory path"
-  else
-    if [[ -d "$1" ]]; then
-      if [ -n "$(/bin/ls -A $1)" ]; then
-        for _zqs_fragment in $(/bin/ls -A $1)
-        do
-          if [ -r $1/$_zqs_fragment ]; then
-            source $1/$_zqs_fragment
-          fi
-        done
-        unset _zqs_fragment
-      fi
-    else
-      echo "$1 is not a directory"
-    fi
-  fi
-}
-
-
-# Make it easy to append your own customizations that override the
-# quickstart's defaults by loading all files from the ~/.zshrc.d directory
-load-shell-fragments ~/.zshrc.d
-
-
-#source $ZSH/oh-my-zsh.sh
 NEWLINE=$'\n'
 TAB=$'  '
-
-#PROMPT=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
-
 [ -f ${HOME}/.env ] && . ${HOME}/.env
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#zprof
-export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="/usr/local/opt/libressl/bin:$PATH"
-export PATH="~/.asdf/shims:$PATH"
-export PATH="${PATH}:~/bin"
-export KUBE_EDITOR='code --wait'
+export EDITOR='code --wait'
 eval "$(starship init zsh)"
