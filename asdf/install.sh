@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 
 canonical=$(cd -P -- "$(dirname -- "$0")" && printf '%s\n' "$(pwd -P)/$(basename -- "$0")")
+asdf plugin-add git
+asdf install git latest
+asdf global git latest
+
 asdf plugin-add python
 asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
 asdf plugin-add gradle https://github.com/rfrancis/asdf-gradle.git
@@ -9,10 +13,9 @@ asdf plugin-add istioctl https://github.com/rafik8/asdf-istioctl.git
 asdf plugin-add kubectl https://github.com/Banno/asdf-kubectl.git
 asdf plugin-add kind https://github.com/johnlayton/asdf-kind
 asdf plugin-add k9s https://github.com/looztra/asdf-k9s
-asdf plugin add oc https://github.com/sqtran/asdf-oc.git
 asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
 asdf plugin-add terraform 
-asdf plugin-add promtool https://github.com/looztra/asdf-promtool
+asdf plugin-add promtool https://github.com/xocasdashdash/asdf-promtool
 asdf plugin-add nodejs
 asdf plugin-add goreleaser https://github.com/kforsthoevel/asdf-goreleaser.git
 asdf plugin-add github-cli https://github.com/bartlomiejdanek/asdf-github-cli.git
@@ -20,40 +23,43 @@ asdf plugin-add just https://github.com/franklad/asdf-just
 asdf plugin update just 8f4b5c209ed59f6e3acc600a470b69d68f5d78e1
 asdf plugin-add gojq
 asdf plugin-add fzf
-asdf plugin-add git
 asdf plugin add 1password-cli
 asdf plugin add awscli
 asdf plugin add starship
-asdf install ag ag
+asdf plugin add ag
+asdf plugin add packer
 
-
-install_asdf() {
-  artifact="$1"
+_install_and_set() {
+  set -x
+  package="$1"
   version="${2:-latest}"
-  echo "Installing $version of $artifact"
-  asdf install $artifact $version
-  asdf global "$artifact" "$version"
+  asdf install "${package}" "${version}"
+  asdf global "${package}" "${version}"
+  set +x
 }
-# Note this may fail because of github rate limiting.
-install_asdf git
-install_asdf golang
-install_asdf python
-install_asdf java adoptopenjdk-8.0.282+8
-install_asdf kubectl
-install_asdf terraform
-install_asdf promtool
-install_asdf nodejs
-install_asdf goreleaser
-install_asdf node 
-install_asdf github-cli
-install_asdf just
-install_asdf 1password-cli
-install_asdf awscli
-install_asdf ag
+_install_and_set golang 
+_install_and_set python 
+_install_and_set java adoptopenjdk-8.0.282+8
+_install_and_set kubectl 
+_install_and_set terraform
+_install_and_set packer
+_install_and_set promtool 
+_install_and_set istioctl 
+_install_and_set nodejs 
+_install_and_set gradle 
+_install_and_set goreleaser 
+_install_and_set node 
+_install_and_set github-cli 
+_install_and_set just 
+_install_and_set gojq 
+_install_and_set fzf 
+_install_and_set 1password-cli 
+_install_and_set awscli 
+_install_and_set starship 
+_install_and_set ag 
 
-install_asdf gojq
-install_asdf fzf
-install_asdf starship
+unset -f _install_and_set
+
 
 
 ## Install completions for some tools
@@ -70,3 +76,6 @@ sed -i.bak -e 's|exec $(asdf_dir)/bin/asdf exec|exec $(asdf_dir)/bin/private/asd
 find  ~/.asdf/shims  -type f -exec rm {} \;
 asdf reshim
 rm -rf /tmp/asdf-exec
+
+
+"$(asdf where fzf)/install" --all

@@ -190,4 +190,4 @@
 	helper = 
 	helper = !/Users/joaquin/.asdf/shims/gh auth git-credential
 [commit]
-	gpgsign = true
+	gpgsign = false
