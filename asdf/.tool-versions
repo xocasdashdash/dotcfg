@@ -1,5 +1,5 @@
 java adoptopenjdk-8.0.345+1
-golang 1.19
+golang 1.19.2
 python 3.9.4
 kubectl 1.24.2
 oc 4.7.7
@@ -10,13 +10,13 @@ istioctl 1.9.3
 pnpm 6.1.0-202104230041
 nodejs 14.17.0
 gradle 7.4
-goreleaser 0.172.1
+goreleaser 1.11.5
 golangci-lint 1.49.0
 aws-sam-cli 1.33.0
 aws-vault 6.3.1
 packer 1.7.8
 awscli 2.7.20
-github-cli 2.15.0
+github-cli 2.17.0
 just 1.2.0
 mysql 8.0.29
 dagger 0.2.19
@@ -34,3 +34,4 @@ starship 1.10.2
 ag 2.2.0
 cloudflared 2022.9.0
 maven 3.8.6
+ansible 6.5.0

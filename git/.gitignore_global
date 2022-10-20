@@ -6,3 +6,9 @@ github-access-token.txt
 github-access-token.txt*
 .pre-commit-config.yaml
 .vscode
+terraform.tfstate
+terraform.tfstate*
+secret.txt
+secret.txt
+tfplan
+errored.tfstate

@@ -108,5 +108,5 @@ TAB=$'  '
 [ -f ${HOME}/.env ] && . ${HOME}/.env
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export EDITOR='code --wait'
+export EDITOR='code --wait -n'
 eval "$(starship init zsh)"
