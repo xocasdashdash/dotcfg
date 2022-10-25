@@ -48,7 +48,9 @@ export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/libressl/bin:$PATH"
 export PATH="$HOME/.asdf/shims:$PATH"
 export PATH="${PATH}:$HOME/bin"
-
+PYTHON_BIN_PATH=$(dirname $(asdf which python))
+export PATH="${PYTHON_BIN_PATH}:${PATH}"
+unset PYTHON_BIN_PATH
 # We need to load shell fragment files often enough to make it a function
 function load-shell-fragments() {
   if [[ -z $1 ]]; then
