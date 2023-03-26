@@ -9,7 +9,7 @@
 [user]
 	email = jfcampo@gmail.com
 	name = Joaquín Fernández Campo
-	signingkey = CCF5AAAAA1BA2493
+	#signingkey = CCF5AAAAA1BA2493
 [format]
     signoOff = true
 #}}}
