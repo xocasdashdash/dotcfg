@@ -12,4 +12,7 @@ secret.txt
 secret.txt
 tfplan
 errored.tfstate
+encrypter
+.editorconfig
 .tool-versions
+.DS_Store

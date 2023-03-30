@@ -76,6 +76,7 @@ function load-shell-fragments() {
 load-shell-fragments ~/.zshrc.d
 
 ZSH_DISABLE_COMPFIX=true
+fpath+=~/.zshrc-completions.d
 setup-zgen-repos() {
   zgenom ohmyzsh
   zgenom ohmyzsh plugins/git
@@ -95,7 +96,7 @@ setup-zgen-repos() {
   zgenom load agkozak/zsh-z
   if [ $(uname -a | grep -ci Darwin) = 1 ]; then
     # Load macOS-specific plugins
-    zgenom oh-my-zsh plugins/brew
+  zgenom oh-my-zsh plugins/brew
     zgenom oh-my-zsh plugins/macos
   fi
   zgenom save
@@ -109,6 +110,5 @@ NEWLINE=$'\n'
 TAB=$'  '
 [ -f ${HOME}/.env ] && . ${HOME}/.env
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 export EDITOR='code --wait -n'
 eval "$(starship init zsh)"

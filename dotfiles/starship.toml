@@ -41,6 +41,10 @@ behind = "⇣${count}"
 format = 'on [$symbol($profile )(\($region\)) $duration]($style)'
 style = "green"
 symbol = "🅰 "
+force_display = true
+[aws.region_aliases]
+us-east-1 = "use1"
+us-west-2 = "usw2"
 [golang]
 format = "via [🏎💨 $version](cyan) "
 [php]
