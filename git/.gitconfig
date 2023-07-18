@@ -185,9 +185,9 @@
 [credential "https://gist.github.com"]
     username = xocasdashdash
 	helper = 
-	helper = !/Users/joaquin/.asdf/shims/gh auth git-credential
+	helper = !~/.asdf/shims/gh auth git-credential
 [credential "https://github.com"]
 	helper = 
-	helper = !/Users/joaquin/.asdf/shims/gh auth git-credential
+	helper = !~/.asdf/shims/gh auth git-credential
 [commit]
 	gpgsign = false
