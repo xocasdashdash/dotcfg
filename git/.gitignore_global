@@ -16,3 +16,4 @@ encrypter
 .editorconfig
 .tool-versions
 .DS_Store
+__debug_bin

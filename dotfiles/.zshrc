@@ -1,9 +1,8 @@
 # Set up the prompt
 DISABLE_AUTO_UPDATE="true"
-zmodload zsh/zprof
+#zmodload zsh/zprof
 [[ -e ${ZDOTDIR:-~}/.zgenom ]] || git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
 
-. $HOME/.asdf/asdf.sh
 source "${HOME}/.zgenom/zgenom.zsh"
 # Check for plugin and zgenom updates every 7 days
 # This does not increase the startup time.
@@ -48,7 +47,10 @@ export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/libressl/bin:$PATH"
 export PATH="$HOME/.asdf/shims:$PATH"
 export PATH="${PATH}:$HOME/bin"
-PYTHON_BIN_PATH=$(dirname $(asdf which python))
+
+# . $HOME/.asdf/asdf.sh
+eval "$(rtx activate zsh)" && _rtx_hook
+PYTHON_BIN_PATH=$(dirname $(which python))
 export PATH="${PYTHON_BIN_PATH}:${PATH}"
 unset PYTHON_BIN_PATH
 # We need to load shell fragment files often enough to make it a function
@@ -102,7 +104,7 @@ setup-zgen-repos() {
   zgenom save
 }
 
-if ! zgen saved; then
+if ! zgenom saved; then
   setup-zgen-repos
 fi
 
@@ -111,4 +113,5 @@ TAB=$'  '
 [ -f ${HOME}/.env ] && . ${HOME}/.env
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export EDITOR='code --wait -n'
+#zprof
 eval "$(starship init zsh)"

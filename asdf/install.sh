@@ -57,9 +57,17 @@ _install_and_set 1password-cli
 _install_and_set awscli 
 _install_and_set starship 
 _install_and_set ag 
+_install_and_set php 8.1.17
+_install_and_set amazon-ecr-credential-helper 0.6.0
 
 unset -f _install_and_set
 
+# configure 1password cli to the expected location in order to get it to work.
+# codesign -d --entitlements - /Applications/1Password.app/Contents/Library/LoginItems/1Password\ Launcher.app
+currentOpPath=$(asdf which op)
+sudo mv "${currentOpPath}" /usr/local/Cellar/onepasswordcli
+rm "${currentOpPath}"
+ln -s /usr/local/Cellar/onepasswordcli "${currentOpPath}"
 
 
 ## Install completions for some tools

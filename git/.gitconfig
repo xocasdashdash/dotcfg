@@ -9,13 +9,19 @@
 [user]
 	email = jfcampo@gmail.com
 	name = Joaquín Fernández Campo
-	#signingkey = CCF5AAAAA1BA2493
+	signingkey = CCF5AAAAA1BA2493
+
+[commit]
+	gpgsign = true
 [format]
     signoOff = true
 #}}}
 # include sendemail config {{{
 [include]
     path = ~/.git-sendemail
+
+[include]
+	path = ~/.git_secret_config
 # }}}
 # color {{{
 [color]
@@ -176,8 +182,6 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-[include]
-	path = ~/.git_secret_config
 [init]
 	defaultBranch = main
 [url "https://github.com/"]
@@ -191,3 +195,4 @@
 	helper = !~/.asdf/shims/gh auth git-credential
 [commit]
 	gpgsign = false
+	helper = !~/.asdf/shims/gh auth git-credential
