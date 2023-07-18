@@ -17,8 +17,6 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.zsh_history
 
-# Path to your oh-my-zsh installation.
-export ZSH="${HOME}/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -76,7 +74,6 @@ function load-shell-fragments() {
 # Make it easy to append your own customizations that override the
 # quickstart's defaults by loading all files from the ~/.zshrc.d directory
 load-shell-fragments ~/.zshrc.d
-
 ZSH_DISABLE_COMPFIX=true
 fpath+=~/.zshrc-completions.d
 setup-zgen-repos() {
