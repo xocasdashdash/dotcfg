@@ -43,7 +43,6 @@ fi
 # Configure path
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/libressl/bin:$PATH"
-export PATH="$HOME/.asdf/shims:$PATH"
 export PATH="${PATH}:$HOME/bin"
 
 # . $HOME/.asdf/asdf.sh
@@ -84,6 +83,7 @@ setup-zgen-repos() {
   zgenom ohmyzsh plugins/pip
   zgenom ohmyzsh plugins/lein
   zgenom ohmyzsh plugins/command-not-found
+  zgenom ohmyzsh plugins/gitfast
   zgenom load zsh-users/zsh-completions src
   zgenom load unixorn/autoupdate-zgenom
   zgenom load unixorn/fzf-zsh-plugin
@@ -111,4 +111,15 @@ TAB=$'  '
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export EDITOR='code --wait -n'
 #zprof
+complete -C '$(which aws_completer)' aws
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/joaquin.campo/.local/share/rtx/installs/terraform/1.5.7/bin/terraform terraform
+
+# pnpm
+export PNPM_HOME="/Users/joaquin.campo/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 eval "$(starship init zsh)"
