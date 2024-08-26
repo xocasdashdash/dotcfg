@@ -43,10 +43,11 @@ fi
 # Configure path
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/libressl/bin:$PATH"
-export PATH="${PATH}:$HOME/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/bin"
 
 # . $HOME/.asdf/asdf.sh
-eval "$(rtx activate zsh)" && _rtx_hook
+eval "$(mise activate zsh)" && _mise_hook
 PYTHON_BIN_PATH=$(dirname $(which python))
 export PATH="${PYTHON_BIN_PATH}:${PATH}"
 unset PYTHON_BIN_PATH
@@ -84,6 +85,7 @@ setup-zgen-repos() {
   zgenom ohmyzsh plugins/lein
   zgenom ohmyzsh plugins/command-not-found
   zgenom ohmyzsh plugins/gitfast
+  zgenom load dbz/kube-aliases
   zgenom load zsh-users/zsh-completions src
   zgenom load unixorn/autoupdate-zgenom
   zgenom load unixorn/fzf-zsh-plugin
@@ -113,7 +115,7 @@ export EDITOR='code --wait -n'
 #zprof
 complete -C '$(which aws_completer)' aws
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/joaquin.campo/.local/share/rtx/installs/terraform/1.5.7/bin/terraform terraform
+complete -o nospace -C /Users/joaquin.campo/.local/share/mise/installs/terraform/1.5.7/bin/terraform terraform
 
 # pnpm
 export PNPM_HOME="/Users/joaquin.campo/Library/pnpm"
@@ -122,4 +124,8 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+autoload -U compinit
+compinit
+source <(jj util completion zsh)
+
 eval "$(starship init zsh)"
