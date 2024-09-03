@@ -46,7 +46,6 @@ export PATH="/usr/local/opt/libressl/bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/bin"
 
-# . $HOME/.asdf/asdf.sh
 eval "$(mise activate zsh)" && _mise_hook
 PYTHON_BIN_PATH=$(dirname $(which python))
 export PATH="${PYTHON_BIN_PATH}:${PATH}"
@@ -129,3 +128,5 @@ compinit
 source <(jj util completion zsh)
 
 eval "$(starship init zsh)"
+export PATH="/opt/homebrew/opt/php@8.2/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@8.2/sbin:$PATH"

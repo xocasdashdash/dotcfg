@@ -15,6 +15,6 @@ sh dotfiles/install.sh
 mkdir -p "$HOME/.oh-my-zsh/completions"
 mkdir -p "$HOME/.zshrc.d/"
 
-sh asdf/install.sh
+sh mise/install.sh
 sh iterm/install.sh
 sh git/install.sh

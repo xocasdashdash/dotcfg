@@ -9,10 +9,7 @@
 [user]
 	email = jfcampo@gmail.com
 	name = Joaquín Fernández Campo
-	signingkey = CCF5AAAAA1BA2493
 
-[commit]
-	gpgsign = true
 [format]
     signoOff = true
 #}}}
@@ -189,10 +186,21 @@
 [credential "https://gist.github.com"]
     username = xocasdashdash
 	helper = 
-	helper = !~/.asdf/shims/gh auth git-credential
+	helper = !~/.local/share/mise/installs/github-cli/latest/bin/gh auth git-credential
 [credential "https://github.com"]
 	helper = 
-	helper = !~/.asdf/shims/gh auth git-credential
+	helper = !~/.local/share/mise/installs/github-cli/latest/bin/gh auth git-credential
 [commit]
-	gpgsign = false
-	helper = !~/.asdf/shims/gh auth git-credential
+	helper = 
+	helper = !~/.local/share/mise/installs/github-cli/latest/bin/gh auth git-credential
+    gpgsign = true
+
+
+[user]
+  signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCUHvFg7TWbu9hXCUVxFezliznBsKDudLi+Pzhp0WAESMhMcZAewabsJE8W0yCR/yhaS7l1zVCKcUqjNvWxriSSKbhKRlNz5pH+OsEky9nT8dSNUprFeS50VwcrfouiXWRA6Tob92NciTi0jpAKqcpYdbbiAsoWh2Di3Mzhjy7CW3ylCSgmwpaHruDRi3GfKPNTJXGEswGNSeGU5qTcAmnOJU4FNIp61gfEObP4Wteo4Czl2sKWQuUO3LUFaFRzfzfZZL3Tzw7AplUh05wG9IL+oOklxXdBp/v77cEYsIO+IXqsskGIwoPSbEKHq+bkqf3H7W4txd1QgX2dRk+5I7EhuCNdV89/+m6mz6iU5bk9IP4Bmeq1+kNkELxbJXXH+VK0ksQhRroNn8HqbSY6j4F8Kk3gLIp/694TyebD0vOONl1NBb2fNV1MRjcfYYbU3hhvsfsWpTOpoA502yegHWIkij7CFurYmWG8vMDbNjyyg4iByUdr6PUariQbJ6qbN70=
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
