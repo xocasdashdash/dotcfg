@@ -1,12 +1,11 @@
 .env
-*_private_key*
+.ignore.*
 
 launch.json
 github-access-token.txt
 github-access-token.txt*
 .pre-commit-config.yaml
 .vscode
-terraform.tfstate
 terraform.tfstate*
 secret.txt
 secret.txt
@@ -17,3 +16,5 @@ encrypter
 .tool-versions
 .DS_Store
 __debug_bin
+.serena
+__debug_bin*
