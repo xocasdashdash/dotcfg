@@ -1,6 +1,5 @@
 # 1. Load zprof for debugging
 # zmodload zsh/zprof
-
 # 2. Zgenom Setup
 # Force disable autoupdates to kill the 2.4s lag
 export ZGEN_AUTOLOAD_COMPINIT=0 
@@ -118,6 +117,11 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
+# This is to disable the telemetry of the tools I use
+export OTEL_LOGS_EXPORTER=none
+export OTEL_TRACES_EXPORTER=none
+export OTEL_METRICS_EXPORTER=none
 
 
 # Prompt
