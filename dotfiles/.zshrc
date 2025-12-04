@@ -1,3 +1,17 @@
+
+
+# Path
+export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/libressl/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+# Use Shims (Fast) instead of Activate (Slow)
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
+if [[ "$TERM_PROGRAM" == "vscode" || "$TERM_PROGRAM" == "cursor" ]]; then
+  # trying to make cursor work extracted from here https://forum.cursor.com/t/guide-fix-cursor-agent-terminal-hangs-caused-by-zshrc/107260
+  return
+fi
+
 # 1. Load zprof for debugging
 # zmodload zsh/zprof
 # 2. Zgenom Setup
@@ -22,12 +36,7 @@ else
   export EDITOR='mvim'
 fi
 
-# Path
-export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="/usr/local/opt/libressl/bin:$PATH"
-export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-# Use Shims (Fast) instead of Activate (Slow)
-export PATH="$HOME/.local/share/mise/shims:$PATH"
+
 
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
 
